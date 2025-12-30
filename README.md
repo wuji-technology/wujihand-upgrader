@@ -1,6 +1,6 @@
 # Wuji Hand Upgrader
 
-Wuji HMI 应用程序 - 用于机器人灵巧手升级的桌面应用
+Wuji Hand Upgrader - 用于机器人灵巧手升级的桌面应用
 
 ## 系统要求
 
