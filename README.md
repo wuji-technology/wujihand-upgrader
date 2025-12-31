@@ -1,10 +1,10 @@
 # Wuji Hand Upgrader
 
-Wuji HMI 应用程序 - 用于机器人灵巧手升级的桌面应用
+Wuji Hand Upgrader - 用于机器人灵巧手升级的桌面应用
 
 ## 系统要求
 
-- **操作系统**: Linux (Ubuntu 20.04+)
+- **操作系统**: Ubuntu 22.04 LTS / Ubuntu 24.04 LTS
 - **架构**: x86_64 (AMD64)
 
 ## 安装方式
