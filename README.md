@@ -1,57 +1,76 @@
-# Wuji Hand Upgrader
+# wujihand-upgrader
 
-Wuji Hand Upgrader - 用于机器人灵巧手升级的桌面应用
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/wuji-technology/wujihand-upgrader)](https://github.com/wuji-technology/wujihand-upgrader/releases)
 
-## 系统要求
+Wuji Hand Upgrader: firmware upgrade tool for Wuji Hand.
 
-- **操作系统**: Ubuntu 22.04 LTS / Ubuntu 24.04 LTS
-- **架构**: x86_64 (AMD64)
+## Table of Contents
 
-## 安装方式
+- [Usage](#usage)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running](#running)
+- [Contact](#contact)
 
-### Debian 包 (.deb)（推荐）
+## Usage
 
-Debian 包提供系统级安装，适合需要集成到系统菜单的用户。安装后会自动配置串口权限和用户组。
+### Prerequisites
 
-#### 下载
-下载最新对应版本的 .deb 文件：
-- GitHub Releases：https://github.com/wuji-technology/wujihand-upgrader-hmi/releases
+- **OS**: Ubuntu 22.04 LTS / Ubuntu 24.04 LTS
+- **Architecture**: x86_64 (AMD64)
 
-#### 安装步骤
+### Installation
 
-1. **使用 apt 安装应用程序**
-   注意：将 <downloaded-latest-package-name> 替换为实际下载的软件包名称。
-   ```bash
-   sudo apt install ./<downloaded-latest-package-name>.deb
-   # 如遇依赖问题可执行
-   sudo apt-get install -f
-   ```
+#### Debian Package (.deb)
 
-3. **运行应用程序**
-   
-   在桌面端点击“WUJI”APP图标运行
+Debian packages provide system-level installation with automatic permission configuration.
 
-#### 权限配置
-安装完成后，系统会自动：
-- 开放串口设备访问权限
-- 将当前用户添加到相应的用户组
-- 配置必要的硬件访问权限
+#### Download
 
-#### 时序要求
-固件升级时，需要满足以下时序：
-1. 灵巧手处于断电状态，先打开wujihand-upgrader应用程序
-2. 灵巧手先通过USB连接到PC，然后再给灵巧手通电
-3. wujihand-upgrader会自动连接到灵巧手引导程序
-4. 正常连接后可进行固件升级操作
+Download the latest .deb package:
+- GitHub Releases: [https://github.com/wuji-technology/wujihand-upgrader/releases](https://github.com/wuji-technology/wujihand-upgrader/releases)
 
-**注意**：若连接后提示当前不处于引导程序，需要重新给灵巧手上电
+#### Install
 
-#### 卸载
+Install the application using apt. Replace `<downloaded-package-name>` with the actual package name.
+
+```bash
+sudo apt install ./<downloaded-package-name>.deb
+# If dependency issues occur
+sudo apt-get install -f
+```
+
+#### Permission Configuration
+
+After installation, the system will automatically:
+- Configure serial port access permissions
+- Add user to required groups
+- Set up hardware access permissions
+
+#### Uninstall
+
 ```bash
 sudo apt remove wujihand-upgrader
 ```
 
-**注意**: 首次运行可能需要较长时间来解压和初始化应用程序。请耐心等待。
+### Running
 
+Click the "WUJI" app icon on your desktop.
 
+**Note**: First run may take longer to extract and initialize the application.
 
+#### Upgrade Procedure
+
+Firmware upgrade requires the following sequence:
+
+1. Ensure the hand is **powered off**, then open Wuji Hand Upgrader application
+2. Connect the hand to PC via USB, then power on the hand
+3. The application will auto-connect to the bootloader
+4. Proceed with firmware upgrade
+
+**Note**: If the application shows "not in bootloader mode", power cycle the hand and retry.
+
+## Contact
+
+For any questions, please contact [support@wuji.tech](mailto:support@wuji.tech).
