@@ -29,7 +29,7 @@ Debian packages provide system-level installation with automatic permission conf
 #### Download
 
 Download the latest .deb package:
-- GitHub Releases: https://github.com/wuji-technology/wujihand-upgrader/releases
+- GitHub Releases: [https://github.com/wuji-technology/wujihand-upgrader/releases](https://github.com/wuji-technology/wujihand-upgrader/releases)
 
 #### Install
 
@@ -73,4 +73,4 @@ Firmware upgrade requires the following sequence:
 
 ## Contact
 
-For any questions, please contact support@wuji.tech.
+For any questions, please contact [support@wuji.tech](mailto:support@wuji.tech).
