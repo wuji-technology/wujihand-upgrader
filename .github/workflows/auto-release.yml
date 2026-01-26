@@ -88,8 +88,9 @@ jobs:
               return body.trim();
             }
 
-            // 查找对应版本
-            const versionRegex = new RegExp(`## \\[${version}\\](?: - (\\d{4}-\\d{2}-\\d{2}))?\\n([\\s\\S]*?)(?=\\n## \\[|$)`);
+            // 查找对应版本（转义版本号中的特殊字符，支持预发布版本如 1.0.0-rc4）
+            const escapedVersion = version.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const versionRegex = new RegExp(`## \\[${escapedVersion}\\](?: - (\\d{4}-\\d{2}-\\d{2}))?\\n([\\s\\S]*?)(?=\\n## \\[|$)`);
             const match = changelog.match(versionRegex);
 
             if (!match) {
@@ -101,22 +102,51 @@ jobs:
             const content = match[2];
             let body = parseContent(content);
 
-            // 获取所有版本用于 Full Changelog
-            const allVersions = [...changelog.matchAll(/## \[(\d+\.\d+\.\d+)\]/g)].map(m => m[1]);
+            // 获取所有版本用于 Full Changelog（支持预发布版本如 1.0.0-rc4）
+            const allVersions = [...changelog.matchAll(/## \[(\d+\.\d+\.\d+(?:-[a-zA-Z0-9.]+)?)\]/g)].map(m => m[1]);
             const versionIndex = allVersions.indexOf(version);
             const prevVersion = allVersions[versionIndex + 1];
             if (prevVersion) {
               body += `\n\n---\n\n**Full Changelog**: [v${prevVersion}...${tag}](https://github.com/${context.repo.owner}/${context.repo.repo}/compare/v${prevVersion}...${tag})`;
             }
 
-            // 创建 Pre-release
-            await github.rest.repos.createRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag_name: tag,
-              name: tag,
-              body: `## ${tag} (${date})\n\n${body}`,
-              prerelease: true,
-              make_latest: 'false'
-            });
-            console.log(`Created pre-release: ${tag}`);
+            // Upsert: 检查 release 是否存在，存在则更新，不存在则创建
+            const releaseBody = `## ${tag} (${date})\n\n${body}`;
+            let existingRelease;
+            try {
+              existingRelease = await github.rest.repos.getReleaseByTag({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag: tag
+              });
+            } catch (e) {
+              // 只有 404 表示 release 不存在，其他错误应该抛出
+              if (e.status !== 404) {
+                throw e;
+              }
+            }
+
+            if (existingRelease) {
+              await github.rest.repos.updateRelease({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                release_id: existingRelease.data.id,
+                tag_name: tag,
+                name: tag,
+                body: releaseBody,
+                prerelease: true,
+                make_latest: 'false'
+              });
+              console.log(`Updated pre-release: ${tag}`);
+            } else {
+              await github.rest.repos.createRelease({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag_name: tag,
+                name: tag,
+                body: releaseBody,
+                prerelease: true,
+                make_latest: 'false'
+              });
+              console.log(`Created pre-release: ${tag}`);
+            }
