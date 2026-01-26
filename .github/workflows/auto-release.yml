@@ -27,7 +27,8 @@ jobs:
               core.setFailed('CHANGELOG.md not found');
               return;
             }
-            const changelog = fs.readFileSync('CHANGELOG.md', 'utf8');
+            const changelog = fs.readFileSync('CHANGELOG.md', 'utf8')
+              .replace(/\r\n?/g, '\n');
 
             // 从 tag 提取版本号
             const tag = context.ref.replace('refs/tags/', '');
