@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.1] - 2026-02-02
+
 ### Added
 
 - Add GitHub Actions CI/CD workflow for automated build and release
@@ -43,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Replace hardcoded Chinese error messages with i18n internationalization
 - Comprehensive improvements to firmware version handling and error display
 
-[Unreleased]: https://github.com/wuji-technology/wujihand-upgrader/compare/v4.1.0...HEAD
+[Unreleased]: https://github.com/wuji-technology/wujihand-upgrader/compare/v4.1.1...HEAD
+[4.1.1]: https://github.com/wuji-technology/wujihand-upgrader/compare/v4.1.0...v4.1.1
 [4.1.0]: https://github.com/wuji-technology/wujihand-upgrader/compare/v4.0.0...v4.1.0
 [4.0.0]: https://github.com/wuji-technology/wujihand-upgrader/releases/tag/v4.0.0
