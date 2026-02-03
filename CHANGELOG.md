@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Only mark versions with -rc/-alpha/-beta as prerelease in CI release workflow
+
 ## [4.1.1] - 2026-02-02
 
 ### Added
