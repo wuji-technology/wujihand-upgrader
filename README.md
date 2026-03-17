@@ -71,6 +71,30 @@ Firmware upgrade requires the following sequence:
 
 **Note**: If the application shows "not in bootloader mode", power cycle the hand and retry.
 
+## Troubleshooting
+
+### Window Not Appearing (GBM Buffer Error)
+
+**Symptom**: After installation, clicking the desktop icon shows an icon in the sidebar but the upgrader window never appears. 
+
+Running from terminal shows:
+
+> Failed to create GBM buffer of size 1280x720: Permission denied
+
+**Cause**: This is likely related to the NVIDIA driver not having
+  DRM kernel mode setting enabled. See [dioxus#1909](https://github.com/DioxusLabs/dioxus/issues/1909#issuecomment-1974930010) for details.
+  
+**Solution**:
+  1. Check if modesetting is enabled:
+
+     `cat /sys/module/nvidia_drm/parameters/modeset`
+
+  2. If the output is `N`, enable it:
+
+     `echo options nvidia_drm modeset=1 | sudo tee /etc/modprobe.d/nvidia_drm.conf`
+
+  3. Restart your computer.
+
 ## Contact
 
 For any questions, please contact [support@wuji.tech](mailto:support@wuji.tech).
