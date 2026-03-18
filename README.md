@@ -11,6 +11,7 @@ Wuji Hand Upgrader: firmware upgrade tool for Wuji Hand.
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running](#running)
+- [Documentation](#documentation)
 - [Contact](#contact)
 
 ## Usage
@@ -70,6 +71,10 @@ Firmware upgrade requires the following sequence:
 4. Proceed with firmware upgrade
 
 **Note**: If the application shows "not in bootloader mode", power cycle the hand and retry.
+
+## Documentation
+
+For the full user guide, troubleshooting, and more, visit the [Wuji Documentation Center](https://docs.wuji.tech).
 
 ## Contact
 
